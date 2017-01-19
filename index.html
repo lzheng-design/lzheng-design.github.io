@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html, body {
+  background-color: #666666;
+  margin: 0;
+  padding: 0;
+  color: #373737;
+  -webkit-font-smoothing: antialiased;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.c_3, .c_4, .c_5{
+  height: 100%;
+  float: left;
+}
+
+.c_3 {
+  width: 25%;
+}
+
+.c_4 {
+  width: 33.33%
+}
+
+.c_5 {
+  width: 41.67%;
+}
+.round_corner {
+  border-radius: 5px;
+}
+
+.shadow_30 {
+  box-shadow: 0 0 30px 0 rgba(0,0,0,0.3);
+}
+
+.clip {
+  overflow: hidden;
+}
+
+.tabs {
+  background-color: rgba(0,0,0,0.15);
+  width: 100%;
+  height: 36px;
+  position: absolute;
+  bottom: 0;
+  transition: height 0.3s;
+  -webkit-transition: height 0.3s;
+}
+.collapse .tabs {
+  height: 0;
+}
+.border_box{
+  box-sizing: border-box;
+}
+
+.btn {
+  height: 30px;
+  font-size: 14px;
+  line-height: 30px;
+  opacity: 0.6;
+  border: rgba(0,0,0,0.4) 1px solid;
+  padding: 0 8px;
+  border-radius: 5px;
+  float: right;
+  margin-top: 8px;
+  margin-right: 16px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.primary {
+  border-color: #27AAE1;
+  color: #27AAE1;
+  opacity: 1;
+}
+.btn:hover {
+  opacity: 1;
+}
+.primary:hover {
+  background-color: #27AAE1;
+  color: white;
+}
+.hide {
+  display: none !important;
+}
+input {
+  -webkit-appearance:none;
+  border: none;
+  font-size: 14px;
+  height: 24px;
+  width: 254px;
+  border-bottom: rgba(0,0,0,0) 1px solid;
+}
+input:hover {
+  border-bottom: rgba(0,0,0,0.1) 1px solid;
+}
+input:focus {
+  outline: none;
+  border-bottom: rgba(0,0,0,0.4) 1px solid;
+}
+input:disabled {
+  border-bottom: rgba(0,0,0,0) 1px solid;
+  color: #373737;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0 24px;
+  background-color: white;
+  border-top: rgba(0,0,0,0.1) 1px solid;
+  border-bottom: rgba(0,0,0,0.1) 1px solid;
+}
+
+#content ul li {
+  margin: 20px 0;
+}
+
+#content ul li span {
+  display: inline-block;
+  width: 96px;
+  font-size: 14px;
+  opacity: 0.6;
+  line-height: 25px;
+}
+#content ul li span.focus {
+  opacity: 1;
+}
+#content ul li icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 24px;
+  border-radius: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: #F8A73C;
+}
+
+#identity {
+  width: 960px;
+  height: 640px;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -480px;
+  margin-top: -320px;
+}
+
+#menu {
+  background-color: #27AAE1;
+}
+
+#list {
+  border-right: rgba(0,0,0,0.1) 1px solid;
+}
+
+#detail {
+  background-color: #f5f5f5;
+  position: relative;
+}
+
+#header {
+  background-color: #F8A73C;
+  width: 100%;
+  height: 160px;
+  position: relative;
+  transition: height 0.3s;
+  -webkit-transition: height 0.3s;
+}
+
+.collapse {
+  height: 124px !important;
+}
+
+#content #tool {
+  width: 100%;
+  height: 48px;
+  background-color: white;
+  border-top: rgba(0,0,0,0.1) 1px solid;
+  position: absolute;
+  bottom: 0;
+}
+#content #tool #btn_cancel {
+  float: left;
+  margin-left: 16px;
+}
+</style>
+</head>
+
+<body>
+  <div id="identity" class="round_corner shadow_30 clip">
+    <div id="menu" class="c_3 border_box"></div>
+    <div id="list" class="c_4 border_box"></div>
+    <div id="detail" class="c_5 border_box">
+      <div id="header" class="clip">
+        <div class="tabs"></div>
+      </div>
+      <div id="content">
+        <ul class="border_box">
+          <li><icon></icon><span class="hide">Username</span><input id="test" value="david.smith@gmail.com" disabled></li>
+          <li><icon></icon><span class="hide">Password</span><input value="123456" type="password" disabled></li>
+          <li><icon></icon><span class="hide">Website</span><input value="www.amazon.com" disabled></li>
+        </ul>
+        <div id="tool" class="border_box">
+          <div id="btn_edit" class="btn">Edit login info</div>
+          <div id="btn_cancel" class="btn hide">Cancel</div>
+          <div id="btn_save" class="btn hide">Save</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var labels = document.getElementsByTagName('span');
+    var icons = document.getElementsByTagName('icon');
+
+    var inputs = document.getElementsByTagName('input');
+    var firstInput = inputs[0];
+
+    var items = document.getElementsByTagName('li');
+    var lastItem = items[items.length-1];
+
+    var header = document.getElementById('header');
+    var btnEdit = document.getElementById('btn_edit');
+    var btnCancel = document.getElementById('btn_cancel');
+    var btnSave = document.getElementById('btn_save');
+
+    document.getElementById('btn_edit').onclick = function() {
+
+      lastItem.className = 'hide';
+      // firstInput.focus();
+
+      window.setTimeout(function () {
+        firstInput.focus();
+      }, 0);
+
+      for (var i in icons) {
+        icons[i].className = 'hide';
+      }
+      for (var i in labels) {
+        labels[i].className = '';
+      }
+      for (var i in inputs) {
+        inputs[i].disabled = false;
+        inputs[i].onfocus = function() {
+          this.parentNode.childNodes[1].className = 'focus';
+        }
+        inputs[i].onblur = function() {
+          this.parentNode.childNodes[1].className = '';
+        }
+      }
+      header.className = 'clip collapse';
+      btnEdit.className = 'hide';
+      btnCancel.className = 'btn';
+      btnSave.className = 'btn primary';
+    };
+
+    btnCancel.onclick = function() {
+      lastItem.className = '';
+
+      for (var i in icons) {
+        icons[i].className = '';
+      }
+      for (var i in labels) {
+        labels[i].className = 'hide';
+      }
+      for (var i in inputs) {
+        inputs[i].disabled = true;
+      }
+
+      header.className = 'clip';
+      btnEdit.className = 'btn';
+      btnCancel.className = 'hide';
+      btnSave.className = 'hide';
+    }
+
+  </script>
+</body>
+</html>
